@@ -190,8 +190,9 @@ public class Client
 
     public void SendIntoGame(string name)
     {
-        player = NetworkManager.instance.InstanciatePlayer();
+        player = NetworkManager.instance.InstanciatePlayer(id);
         player.Initialize(id, name);
+        
 
         foreach (Client client in Server.clients.Values)
         {
@@ -210,6 +211,16 @@ public class Client
             {
                 ServerSend.SpawnPlayer(client.id, player);
             }
+        }
+
+        foreach (HealthPackSpawner healthPacks in HealthPackSpawner.healthPacks.Values) 
+        {
+            ServerSend.CreateItemSpawner(id, healthPacks.spawnerID, healthPacks.transform.position, healthPacks.spawned);
+        }
+
+        foreach (SniperSpawner Snipers in SniperSpawner.sniperSpawns.Values)
+        {
+            ServerSend.CreateSniperSpawner(id, Snipers.spawnerID, Snipers.transform.position, Snipers.spawned);
         }
     }
 

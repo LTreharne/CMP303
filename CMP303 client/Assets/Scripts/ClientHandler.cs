@@ -28,11 +28,16 @@ public class ClientHandle : MonoBehaviour
 
     public static void PlayerPosition(Packet packet) {
         int id = packet.ReadInt();
-
         Vector3 position = packet.ReadVector3();
 
-        GameManager.players[id].transform.position = position;
-    
+        if (id == Client.instance.myId)
+        {
+            GameManager.players[id].transform.position = position;
+        }
+        else { 
+            GameManager.players[id].transform.position = position;
+        }
+
     }  
     
     public static void PlayerRotation(Packet packet) {
@@ -65,5 +70,50 @@ public class ClientHandle : MonoBehaviour
         int id = packet.ReadInt();
 
         GameManager.players[id].Respawn();
+    }
+
+   public static void CreateHealthPackSpanwer(Packet packet)
+    {
+        int id = packet.ReadInt();
+        Vector3 position = packet.ReadVector3();
+        bool hasItem = packet.ReadBool();
+
+        GameManager.instance.CreateItemSpanwer(id, position, hasItem);
+    }
+
+    public static void HealthPackRespawn(Packet packet)
+    {
+        int id = packet.ReadInt();
+        GameManager.healthPacks[id].Respawn();
+    } 
+    
+    public static void HealthPackCollected(Packet packet)
+    {
+        int id = packet.ReadInt();
+        int playerID = packet.ReadInt();
+        GameManager.healthPacks[id].Collect();
+        GameManager.players[playerID].health = GameManager.players[playerID].maxHealth;
+    }
+    
+    public static void CreateSniperSpanwer(Packet packet)
+    {
+        int id = packet.ReadInt();
+        Vector3 position = packet.ReadVector3();
+        bool hasItem = packet.ReadBool();
+
+        GameManager.instance.CreateSniperSpawner(id, position, hasItem);
+    }
+
+    public static void SniperRespawn(Packet packet)
+    {
+        int id = packet.ReadInt();
+        GameManager.SniperSpawns[id].Respawn();
+    } 
+    
+    public static void SniperCollected(Packet packet)
+    {
+        int id = packet.ReadInt();
+        int playerID = packet.ReadInt();
+        GameManager.SniperSpawns[id].Collect();
     }
 }

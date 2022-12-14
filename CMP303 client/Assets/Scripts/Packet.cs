@@ -14,6 +14,12 @@ public enum ServerPackets
     playerDisconnected,
     playerHealth,
     playerRespawn,
+    SniperCollected,
+    CreateSniperSpawner,
+    sniperRespawn,
+    healthPackCollected,
+    healthpackRespawn,
+    createHealthPackSpawner,
 
 }
 

@@ -271,6 +271,12 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
             { (int)ServerPackets.playerRespawn, ClientHandle.PlayerRespawn },
+            { (int)ServerPackets.createHealthPackSpawner, ClientHandle.CreateHealthPackSpanwer },
+            { (int)ServerPackets.healthpackRespawn, ClientHandle.HealthPackRespawn },
+            { (int)ServerPackets.healthPackCollected, ClientHandle.HealthPackCollected },
+            { (int)ServerPackets.CreateSniperSpawner, ClientHandle.CreateSniperSpanwer },
+            { (int)ServerPackets.sniperRespawn, ClientHandle.SniperRespawn },
+            { (int)ServerPackets.SniperCollected, ClientHandle.SniperCollected },
         };
         Debug.Log("Initialized packets.");
     }

@@ -7,14 +7,14 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager instance;
 
     public GameObject playerPrefab;
-
+    public Transform[] spawnPoints;
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
 
 
-        Server.Start(50, 26950);
+        Server.Start(4, 26950);
     }
 
     private void OnApplicationQuit()
@@ -35,8 +35,8 @@ public class NetworkManager : MonoBehaviour
         }   
     }
 
-    public Player InstanciatePlayer()
+    public Player InstanciatePlayer(int id)
     {
-        return Instantiate(playerPrefab, new Vector3(0,0.5f,0), Quaternion.identity).GetComponent<Player>();
+        return Instantiate(playerPrefab, spawnPoints[id].transform.position, Quaternion.identity).GetComponent<Player>();
     }
 }

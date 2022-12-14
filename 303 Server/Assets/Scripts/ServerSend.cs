@@ -138,4 +138,69 @@ public class ServerSend
             SendTCPDataToAll(packet);
         }
     }
+
+    public static void CreateItemSpawner(int toClient, int spawnerID, Vector3 position, bool hasItem)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.createHealthPackSpawner))
+        {
+            packet.Write(spawnerID);
+            packet.Write(position);
+            packet.Write(hasItem);
+
+            SendTCPData(toClient, packet);
+        }
+    }
+
+    public static void HealthPackRespawn(int id)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.healthpackRespawn))
+        {
+            packet.Write(id);
+
+            SendTCPDataToAll(packet);
+        }
+    }
+
+    public static void HealthPackColelcted(int id, int byPlayer)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.healthPackCollected))
+        {
+            packet.Write(id);
+            packet.Write(byPlayer);
+            SendTCPDataToAll(packet);
+        }
+    }
+
+    public static void SniperColelcted(int id, int byPlayer)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.SniperCollected))
+        {
+            packet.Write(id);
+            packet.Write(byPlayer);
+            
+            SendTCPDataToAll(packet);
+        }
+    }
+
+    public static void SniperRespawn(int id)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.sniperRespawn))
+        {
+            packet.Write(id);
+
+            SendTCPDataToAll(packet);
+        }
+    }
+    public static void CreateSniperSpawner(int toClient, int spawnerID, Vector3 position, bool hasItem)
+    {
+        using (Packet packet = new Packet((int)ServerPackets.CreateSniperSpawner))
+        {
+            packet.Write(spawnerID);
+            packet.Write(position);
+            packet.Write(hasItem);
+
+            SendTCPData(toClient, packet);
+        }
+    }
+
 }

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private float yVelocity=0;
     public float health;
     public float maxHealth = 100.0f;
+    public float playerDamage = 35.0f;
 
     private void Start()
     {
@@ -40,6 +41,11 @@ public class Player : MonoBehaviour
         if (health <=0)
         {
             return;
+        }
+
+        if (transform.position.y<=-10)
+        {
+            TakeDamage(maxHealth);
         }
         Vector2 moveDirection = Vector2.zero;
 
@@ -94,11 +100,11 @@ public class Player : MonoBehaviour
 
     public void Shoot(Vector3 shootDirection)
     {
-        if (Physics.Raycast(shootOrigin.position, shootDirection, out RaycastHit hit, 25f))
+        if (Physics.Raycast(shootOrigin.position, shootDirection, out RaycastHit hit,100f))
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<Player>().TakeDamage(35);
+                hit.collider.GetComponent<Player>().TakeDamage(playerDamage);
             }
         }
     }
@@ -115,7 +121,7 @@ public class Player : MonoBehaviour
         {
             health = 0;
             controller.enabled = false;
-            transform.position = new Vector3(0, 25, 0);
+            transform.position = NetworkManager.instance.spawnPoints[id].transform.position;
             ServerSend.PlayerPosition(this);
             StartCoroutine(Respawn());
         }

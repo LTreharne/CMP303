@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//manages player movemnts based off inputs recieved from clients
 public class Player : MonoBehaviour
 {
 

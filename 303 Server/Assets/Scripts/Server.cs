@@ -4,21 +4,23 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System;
+
+
 public class Server
 {
 
     public static int MaxPlayers { get; private set; }
     public static int Port { get; private set; }
     public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
-    public delegate void PacketHandler(int _fromClient, Packet _packet);
+    public delegate void PacketHandler(int fromClient, Packet packet);
     public static Dictionary<int, PacketHandler> packetHandlers;
 
     private static TcpListener tcpListener;
     private static UdpClient udpListener;
-    public static void Start(int _maxPlayers, int _port)
+    public static void Start(int maxPlayers, int port)
     {
-        MaxPlayers = _maxPlayers;
-        Port = _port;
+        MaxPlayers = maxPlayers;
+        Port = port;
 
         Debug.Log("Starting server...");
         InitializeServerData();
@@ -33,22 +35,22 @@ public class Server
         Debug.Log($"Server started on port {Port}.");
     }
 
-    private static void TCPConnectCallback(IAsyncResult _result)
+    private static void TCPConnectCallback(IAsyncResult result)
     {
-        TcpClient _client = tcpListener.EndAcceptTcpClient(_result);
+        TcpClient client = tcpListener.EndAcceptTcpClient(result);
         tcpListener.BeginAcceptTcpClient(TCPConnectCallback, null);
-        Debug.Log($"Incoming connection from {_client.Client.RemoteEndPoint}...");
+        Debug.Log($"Incoming connection from {client.Client.RemoteEndPoint}...");
 
         for (int i = 1; i <= MaxPlayers; i++)
         {
             if (clients[i].tcp.socket == null)
             {
-                clients[i].tcp.Connect(_client);
+                clients[i].tcp.Connect(client);
                 return;
             }
         }
 
-        Debug.Log($"{_client.Client.RemoteEndPoint} failed to connect: Server full!");
+        Debug.Log($"{client.Client.RemoteEndPoint} failed to connect: Server full!");
     }
 
     private static void UDPRecieveCallBack(IAsyncResult result)

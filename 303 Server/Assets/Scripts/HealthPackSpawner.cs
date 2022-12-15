@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//initialised healpacks. checks if players collide with the objects manages altering player healths depsawning and respawning healthpacks
 public class HealthPackSpawner : MonoBehaviour
 {
     // Start is called before the first frame update

@@ -2,6 +2,7 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
+//NOT IN USE PLEASE IGNORE
 
 //public class Player : MonoBehaviour
 //{

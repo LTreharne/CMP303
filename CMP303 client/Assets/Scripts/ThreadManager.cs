@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ this class is used to ensure that the program is running on 1 thread. avoiding any errors that may occour by inity trying to execute different function on alternate threads
+ 
+ */
+
 public class ThreadManager : MonoBehaviour
 {
     private static readonly List<Action> executeOnMainThread = new List<Action>();
@@ -15,7 +20,7 @@ public class ThreadManager : MonoBehaviour
 
     /// <summary>Sets an action to be executed on the main thread.</summary>
     /// <param name="_action">The action to be executed on the main thread.</param>
-    public static void ExecuteOnMainThread(Action _action)
+    public static void ExecuteOnMainThread(Action _action)//USED TO EXECUTE AND ACTION ON THE MAIN THREAD
     {
         if (_action == null)
         {
@@ -31,7 +36,7 @@ public class ThreadManager : MonoBehaviour
     }
 
     /// <summary>Executes all code meant to run on the main thread. NOTE: Call this ONLY from the main thread.</summary>
-    public static void UpdateMain()
+    public static void UpdateMain()//UPDATES THE MAIN THREAD
     {
         if (actionToExecuteOnMainThread)
         {

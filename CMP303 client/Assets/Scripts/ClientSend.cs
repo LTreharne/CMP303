@@ -1,30 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//USED for the managment of packets and messages going from client to server
 public class ClientSend : MonoBehaviour
 {
-    private static void SendTCPData(Packet _packet)
+    private static void SendTCPData(Packet packet)
     {
-        _packet.WriteLength();
-        Client.instance.tcp.SendData(_packet);
+        packet.WriteLength();
+        Client.instance.tcp.SendData(packet);
     }
 
-    private static void SendUDPData(Packet _packet)
+    private static void SendUDPData(Packet packet)
     {
-        _packet.WriteLength();
-        Client.instance.udp.SendData(_packet);
+        packet.WriteLength();
+        Client.instance.udp.SendData(packet);
     }
 
     #region Packets
     public static void WelcomeReceived()
     {
-        using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
+        using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
         {
-            _packet.Write(Client.instance.myId);
-            _packet.Write(UIManager.instance.usernameField.text);
+            packet.Write(Client.instance.myId);
+            packet.Write(UIManager.instance.usernameField.text);
 
-            SendTCPData(_packet);
+            SendTCPData(packet);
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System;
-
+//IDENTICAL TO THE ONE IN client application please see commetns there
 public class ThreadManager : MonoBehaviour
 {
     private static readonly List<Action> executeOnMainThread = new List<Action>();

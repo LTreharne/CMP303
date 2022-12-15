@@ -2,73 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
+//Sends data to clients 
 public class ServerSend
 {
     //TCP SEND FUNCTIONS
-    private static void SendTCPData(int _toClient, Packet _packet)
+    private static void SendTCPData(int toClient, Packet packet)
     {
-        _packet.WriteLength();
-        Server.clients[_toClient].tcp.SendData(_packet);
+        packet.WriteLength();
+        Server.clients[toClient].tcp.SendData(packet);
     }
 
-    private static void SendTCPDataToAll(Packet _packet)
+    private static void SendTCPDataToAll(Packet packet)
     {
-        _packet.WriteLength();
+        packet.WriteLength();
         for (int i = 1; i <= Server.MaxPlayers; i++)
         {
-            Server.clients[i].tcp.SendData(_packet);
+            Server.clients[i].tcp.SendData(packet);
         }
     }
-    private static void SendTCPDataToAllBarOne(int _exceptClient, Packet _packet)
+    private static void SendTCPDataToAllBarOne(int exceptClient, Packet packet)
     {
-        _packet.WriteLength();
+        packet.WriteLength();
         for (int i = 1; i <= Server.MaxPlayers; i++)
         {
-            if (i != _exceptClient)
+            if (i != exceptClient)
             {
-                Server.clients[i].udp.SendData(_packet);
+                Server.clients[i].udp.SendData(packet);
             }
         }
     }
 
     //UDP SEND FUNCTIONS
-    private static void SendUDPData(int _toClient, Packet _packet)
+    private static void SendUDPData(int toClient, Packet packet)
     {
-        _packet.WriteLength();
-        Server.clients[_toClient].udp.SendData(_packet);
+        packet.WriteLength();
+        Server.clients[toClient].udp.SendData(packet);
     }
 
 
-    private static void SendUDPDataToAll(Packet _packet)
+    private static void SendUDPDataToAll(Packet packet)
     {
-        _packet.WriteLength();
+        packet.WriteLength();
         for (int i = 1; i <= Server.MaxPlayers; i++)
         {
-            Server.clients[i].tcp.SendData(_packet);
+            Server.clients[i].tcp.SendData(packet);
         }
     }
-    private static void SendUDPDataToAllBarOne(int _exceptClient, Packet _packet)
+    private static void SendUDPDataToAllBarOne(int exceptClient, Packet packet)
     {
-        _packet.WriteLength();
+        packet.WriteLength();
         for (int i = 1; i <= Server.MaxPlayers; i++)
         {
-            if (i != _exceptClient)
+            if (i != exceptClient)
             {
-                Server.clients[i].udp.SendData(_packet);
+                Server.clients[i].udp.SendData(packet);
             }
         }
     }
 
 
     //ACTUAL SENDING STUFF
-    public static void Welcome(int _toClient, string _msg)
+    public static void Welcome(int toClient, string msg)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.welcome))
+        using (Packet packet = new Packet((int)ServerPackets.welcome))
         {
-            _packet.Write(_msg);
-            _packet.Write(_toClient);
+            packet.Write(msg);
+            packet.Write(toClient);
 
-            SendTCPData(_toClient, _packet);
+            SendTCPData(toClient, packet);
         }
     }
 

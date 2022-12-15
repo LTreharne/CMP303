@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
+
+//USED to handle packets recieved from the server each packet has its own enum telling the server what type of packet its dealing with and will call the correct function based off the clients packet dictonary
 public class ClientHandle : MonoBehaviour
 {
     public static void Welcome(Packet _packet)
@@ -30,9 +32,12 @@ public class ClientHandle : MonoBehaviour
         int id = packet.ReadInt();
         Vector3 position = packet.ReadVector3();
 
-        if (id == Client.instance.myId)
+        if (id == Client.instance.myId)//if the id is = clients id disables input prediction for 1 frame to avoid the rubber banding issue discussed in playerManager .cs comment
         {
-            GameManager.players[id].transform.position = position;
+                GameManager.players[id].transform.position = position;
+                PlayerController player = FindObjectOfType<PlayerController>();
+                player.prediction = false;
+            
         }
         else { 
             GameManager.players[id].transform.position = position;

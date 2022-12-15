@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System;
+
+//CLIENT CLASS IS IDENTICAL to the one in client project
 public class Client
 {
     public static int dataBufferSize = 4096;

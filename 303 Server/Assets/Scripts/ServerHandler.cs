@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//manages the packets recieved from clietns which corrilate to movement, shooting and connection confirmaton 
 public class ServerHandler
 {
-    public static void WelcomeReceived(int _fromClient, Packet _packet)
+    public static void WelcomeReceived(int fromClient, Packet packet)
     {
-        int _clientIdCheck = _packet.ReadInt();
-        string _username = _packet.ReadString();
+        int clientIdCheck = packet.ReadInt();
+        string username = packet.ReadString();
 
-        Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
-        if (_fromClient != _clientIdCheck)
+        if (fromClient != clientIdCheck)
         {
-            Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
+            Debug.Log($"Player \"{username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientIdCheck})!");
         }
         // TODO: send player into game
-        Server.clients[_fromClient].SendIntoGame(_username);
+        Server.clients[fromClient].SendIntoGame(username);
     }
 
     public static void PlayerMovement(int fromClient, Packet packet)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Text;
-
+//IDENTICAL TO THE ONE IN client application
 public enum ServerPackets
 {
     welcome = 1,

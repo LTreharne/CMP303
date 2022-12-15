@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//initialised Sniper. checks if players collide with the objects manages altering player Damage amount, depsawning and ensures the sniper ont respawn
+
 public class SniperSpawner : MonoBehaviour
 {
     // Start is called before the first frame update

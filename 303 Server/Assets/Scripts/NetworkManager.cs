@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//initialised network setting up ports and other critical things like players
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;

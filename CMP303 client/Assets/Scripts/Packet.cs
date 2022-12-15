@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+
+//SOURCE: Youtube. (2019). Sending and receiving data using tcp. [online] Available at: https://www.youtube.com/watch?v=4uHTSknGJaY&list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5&index=2 [Accessed Nov. 21AD].
 /// <summary>Sent from server to client.</summary>
 public enum ServerPackets
 {

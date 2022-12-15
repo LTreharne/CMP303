@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//THIS class manages the ui and is purely gameplay related with no network components besides controlling the button to connect to the server
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;

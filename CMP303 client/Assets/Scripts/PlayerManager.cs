@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Gameplay related for the most part besides handeling data recieved from the server. i.e health geath and positon
 public class PlayerManager : MonoBehaviour
 {
     public int id;
